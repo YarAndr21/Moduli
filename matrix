@@ -1,52 +1,53 @@
 class Matrix:
     def __init__(self, m, n):
-        self.stroki = m
-        self.stolb = n
-        self.d = [0] * (m * n)
+        self.rows = m
+        self.cols = n
+        self.data = [0] * (m * n)
 
-    def zap(self, spisok):
-        for i in range(self.stroki):
-            for j in range(self.stolb):
-                self.d[i * self.stolb + j] = spisok[i][j]
+    def fill(self, items):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.data[i * self.cols + j] = items[i][j]
 
-    def pechat(self):
-        for i in range(self.stroki):
-            s = ''
-            for j in range(self.stolb):
-                s += str(self.d[i * self.stolb + j]) + ' '
-            print(s)
+    def print(self):
+        for i in range(self.rows):
+            row_str = ''
+            for j in range(self.cols):
+                row_str += str(self.data[i * self.cols + j]) + ' '
+            print(row_str)
 
-A = Matrix(3, 3)
-A.zap([
+# Создание и заполнение матрицы 3x3
+M = Matrix(3, 3)
+M.fill([
     [1, -2, 3],
     [-4, 5, -6],
     [7, -8, 9]
 ])
-print("Matrica:")
-A.pechat()
+print("Матрица:")
+M.print()
 
-# вычисление норм
-# норма Фробениуса
-sum_kv = 0
+# Вычисление норм
+# Фробениуса
+sum_sq = 0
 for i in range(3):
     for j in range(3):
-        sum_kv += A.d[i * 3 + j] ** 2
-frob = sum_kv ** 0.5
+        sum_sq += M.data[i * 3 + j] ** 2
+frob_norm = sum_sq ** 0.5
 
-# первая норма 
-col_sum = [0, 0, 0]
-for j in range(3):
-    for i in range(3):
-        col_sum[j] += abs(A.d[i * 3 + j])
-norm1 = max(col_sum)
+# Первая норма (по столбцам)
+col_sums = [0, 0, 0]
+for col in range(3):
+    for row in range(3):
+        col_sums[col] += abs(M.data[row * 3 + col])
+first_norm = max(col_sums)
 
-# бесконечная норма 
-row_sum = [0, 0, 0]
-for i in range(3):
-    for j in range(3):
-        row_sum[i] += abs(A.d[i * 3 + j])
-norm_inf = max(row_sum)
+# Бесконечная норма (по строкам)
+row_sums = [0, 0, 0]
+for row in range(3):
+    for col in range(3):
+        row_sums[row] += abs(M.data[row * 3 + col])
+inf_norm = max(row_sums)
 
-print("\nНорма фробениуса:", round(frob, 4))
-print("Первая норма:", norm1)
-print("Бесконечная норма:", norm_inf)
+print("\nНорма Фробениуса:", round(frob_norm, 4))
+print("Первая норма:", first_norm)
+print("Бесконечная норма:", inf_norm)
