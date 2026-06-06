@@ -40,13 +40,14 @@ def xc(d, k):
     kb = k.encode('utf-8')
     ext_kb = (kb * (len(d) // len(kb) + 1))[:len(d)]
     return bytes(a ^ b for a, b in zip(d, ext_kb))
-t = input("Текст: ")
+t = "Прикладная информатика"
 ky = "секрет"
-e = xc(t, ky)     
-d = xc(e, ky).decode('utf-8')  
+e = xc(t, ky)
+d = xc(e, ky).decode('utf-8')
 print(f"Исходный: {t}")
 print(f"Зашифровано (hex): {e.hex()}")
 print(f"Расшифровано: {d}")
+
 
 
 
