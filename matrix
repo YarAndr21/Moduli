@@ -1,60 +1,46 @@
 class Matrix:
-    def __init__(self, m, n, por):
+    def __init__(self, m, n):
         self.stroki = m
         self.stolb = n
-        self.hran = por          
         self.d = [0] * (m * n)
 
-    def zap(self, spisok):      
-        if self.hran == 'r':
-            for i in range(self.stroki):
-                for j in range(self.stolb):
-                    self.d[i * self.stolb + j] = spisok[i][j]
-        else:
-            for i in range(self.stroki):
-                for j in range(self.stolb):
-                    self.d[j * self.stroki + i] = spisok[i][j]
+    def zap(self, spisok):
+        for i in range(self.stroki):
+            for j in range(self.stolb):
+                self.d[i * self.stolb + j] = spisok[i][j]
 
     def pechat(self):
-        if self.hran == 'r':
-            for i in range(self.stroki):
-                s = ''
-                for j in range(self.stolb):
-                    s += str(self.d[i * self.stolb + j]) + ' '
-                print(s)
-        else:
-            for i in range(self.stroki):
-                s = ''
-                for j in range(self.stolb):
-                    s += str(self.d[j * self.stroki + i]) + ' '
-                print(s)
+        for i in range(self.stroki):
+            s = ''
+            for j in range(self.stolb):
+                s += str(self.d[i * self.stolb + j]) + ' '
+            print(s)
 
-
-A = Matrix(3, 3, 'r')
+A = Matrix(3, 3)
 A.zap([
     [1, -2, 3],
     [-4, 5, -6],
     [7, -8, 9]
 ])
-
 print("Matrica:")
 A.pechat()
 
-#вычисление норм
-# norma Frobeniusa
+# вычисление норм
+# норма Фробениуса
 sum_kv = 0
 for i in range(3):
     for j in range(3):
         sum_kv += A.d[i * 3 + j] ** 2
 frob = sum_kv ** 0.5
 
+# первая норма 
 col_sum = [0, 0, 0]
 for j in range(3):
     for i in range(3):
         col_sum[j] += abs(A.d[i * 3 + j])
 norm1 = max(col_sum)
 
-
+# бесконечная норма 
 row_sum = [0, 0, 0]
 for i in range(3):
     for j in range(3):
@@ -64,4 +50,3 @@ norm_inf = max(row_sum)
 print("\nНорма фробениуса:", round(frob, 4))
 print("Первая норма:", norm1)
 print("Бесконечная норма:", norm_inf)
-
