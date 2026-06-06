@@ -15,8 +15,6 @@ class Matrix:
             for j in range(self.cols):
                 row_str += str(self.data[i * self.cols + j]) + ' '
             print(row_str)
-
-# Создание и заполнение матрицы 3x3
 M = Matrix(3, 3)
 M.fill([
     [1, -2, 3],
@@ -25,7 +23,6 @@ M.fill([
 ])
 print("Матрица:")
 M.print()
-
 # Вычисление норм
 # Фробениуса
 sum_sq = 0
@@ -33,21 +30,18 @@ for i in range(3):
     for j in range(3):
         sum_sq += M.data[i * 3 + j] ** 2
 frob_norm = sum_sq ** 0.5
-
-# Первая норма (по столбцам)
+# Первая норма 
 col_sums = [0, 0, 0]
 for col in range(3):
     for row in range(3):
         col_sums[col] += abs(M.data[row * 3 + col])
 first_norm = max(col_sums)
-
-# Бесконечная норма (по строкам)
+# Бесконечная норма 
 row_sums = [0, 0, 0]
 for row in range(3):
     for col in range(3):
         row_sums[row] += abs(M.data[row * 3 + col])
 inf_norm = max(row_sums)
-
 print("\nНорма Фробениуса:", round(frob_norm, 4))
 print("Первая норма:", first_norm)
 print("Бесконечная норма:", inf_norm)
